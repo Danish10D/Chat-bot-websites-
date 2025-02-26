@@ -1,1 +1,558 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Auto Manager Pro+ | Automated Mining & Withdrawal System</title>
+    <meta name="description" content="Automate cryptocurrency operations with Crypto Auto Manager Pro+ - advanced mining automation and smart withdrawal system">
+    <meta name="keywords" content="crypto automation, bitcoin miner, auto withdrawal crypto, cryptocurrency management">
+    <meta name="author" content="Crypto Solutions Pro">
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Crypto Auto Manager Pro+ | Automated Crypto Management">
+    <meta property="og:description" content="Professional-grade cryptocurrency automation platform">
+    <meta property="og:image" content="https://example.com/crypto-auto-manager-social.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Crypto Auto Manager Pro+">
+    <meta name="twitter:description" content="Advanced crypto mining and portfolio management">
+    <meta name="twitter:image" content="https://example.com/crypto-auto-manager-social.jpg">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Crypto Auto Manager Pro+",
+        "operatingSystem": "Web",
+        "applicationCategory": "CryptocurrencyTool",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "89"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD"
+        },
+        "description": "Professional crypto management system with risk-aware mining",
+        "featureList": [
+            "Real-time mining automation",
+            "Smart withdrawals",
+            "Multi-crypto support",
+            "Advanced risk controls",
+            "Performance analytics"
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --dark: #1a1f24;
+            --dark-green: #1a3b2a;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--dark);
+            color: white;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        .dashboard {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .card {
+            background: #2B2F36;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #2ecc7030;
+        }
+
+        .crypto-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .crypto-tab {
+            background: #3C4049;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .crypto-tab.active {
+            border: 2px solid var(--primary);
+            background: var(--dark-green);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #34495e;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .auto-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        input {
+            background: #3C4049;
+            border: 1px solid var(--primary);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            width: 200px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 0.5rem;
+        }
+
+        .active-status {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--primary); }
+            50% { box-shadow: 0 0 20px var(--primary); }
+            100% { box-shadow: 0 0 5px var(--primary); }
+        }
+
+        .glowing {
+            animation: glow 2s infinite;
+        }
+
+        .beta-settings {
+            border: 2px solid var(--warning);
+            background: #2b2f3644 !important;
+        }
+
+        .advanced-options {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2ecc7030;
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-left: 1rem;
+        }
+
+        .risk-low { background: var(--primary); }
+        .risk-medium { background: var(--warning); }
+        .risk-high { background: var(--danger); }
+
+        @keyframes pulse-high-risk {
+            0% { box-shadow: 0 0 5px var(--danger); }
+            50% { box-shadow: 0 0 20px var(--danger); }
+            100% { box-shadow: 0 0 5px var(--danger); }
+        }
+
+        .high-risk-mode {
+            animation: pulse-high-risk 2s infinite;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #34495e;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+    <h1 style="position: absolute; left: -9999px">Cryptocurrency Automation Platform</h1>
+    
+    <div class="dashboard">
+        <!-- Crypto Selection -->
+        <div class="card">
+            <div class="crypto-selector">
+                <div class="crypto-tab active" onclick="selectCrypto('BTC')">BTC</div>
+                <div class="crypto-tab" onclick="selectCrypto('LTC')">LTC</div>
+                <div class="crypto-tab" onclick="selectCrypto('TRX')">TRX</div>
+                <div class="crypto-tab" onclick="selectCrypto('USDT')">USDT</div>
+            </div>
+        </div>
+
+        <!-- Mining Automation -->
+        <div class="card glowing" id="miningCard">
+            <h2>⛏️ Auto Mining 
+                <span class="status-indicator active-status"></span>
+                <span id="miningStatus">ACTIVE</span>
+            </h2>
+            <div class="progress-bar">
+                <div class="progress" id="miningProgress"></div>
+            </div>
+            <div class="auto-control">
+                <p>Hash Rate: <span id="hashRate">0 H/s</span></p>
+                <p>Balance: <span id="balance">0.00000000</span></p>
+                <button id="toggleMiningBtn" onclick="toggleMining()">⛏️ Stop Mining</button>
+            </div>
+        </div>
+
+        <!-- Auto Withdrawal -->
+        <div class="card" id="withdrawCard">
+            <h2>💰 Auto Withdrawal 
+                <span class="status-indicator"></span>
+                <span id="withdrawStatusText">INACTIVE</span>
+            </h2>
+            <div class="auto-control">
+                <input type="number" 
+                       id="withdrawThreshold" 
+                       placeholder="Threshold (0.01)"
+                       step="0.00000001"
+                       min="0.00000001">
+                <button onclick="toggleWithdraw()" id="withdrawToggleBtn">💸 Enable Auto</button>
+            </div>
+            <div id="withdrawHistory"></div>
+        </div>
+
+        <!-- Beta Settings -->
+        <div class="card beta-settings">
+            <h2>⚙️ Beta Settings 
+                <span class="status-indicator" style="background: var(--warning)"></span>
+            </h2>
+            <div class="auto-control">
+                <label>Advanced Mode: 
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="advancedToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </label>
+            </div>
+
+            <div class="advanced-options" id="advancedOptions">
+                <div class="slider-container">
+                    <label>Mining Intensity</label>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="miningIntensity">
+                    <span id="intensityValue">50%</span>
+                </div>
+
+                <div class="auto-control">
+                    <label>Auto-Reinvest: 
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="reinvestToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </label>
+                    <input type="number" id="reinvestPercentage" 
+                           placeholder="%" min="1" max="100" 
+                           style="width: 80px" disabled>
+                </div>
+
+                <div class="auto-control risk-profile-label">
+                    <label>Risk Management:
+                        <select id="riskProfile" style="background: #3C4049; color: white; padding: 0.5rem">
+                            <option value="low">Low Risk</option>
+                            <option value="medium">Medium Risk</option>
+                            <option value="high">High Risk</option>
+                        </select>
+                    </label>
+                </div>
+
+                <button onclick="showDebugConsole()" style="background: var(--warning)">
+                    🛠️ Debug Console
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Core System Variables
+        let currentCrypto = 'BTC';
+        let balance = 0;
+        let miningInterval;
+        let isMiningActive = true;
+        let autoWithdrawEnabled = false;
+        let withdrawThreshold = 0;
+        let miningSpeed = 100;
+        let currentRiskProfile = 'low';
+
+        const cryptoData = {
+            'BTC': { rate: 0.00001 },
+            'LTC': { rate: 0.001 },
+            'TRX': { rate: 1 },
+            'USDT': { rate: 10 }
+        };
+
+        const riskMultipliers = {
+            low: { reward: 1.0, volatility: 0.3, speed: 1.0 },
+            medium: { reward: 1.5, volatility: 0.6, speed: 1.3 },
+            high: { reward: 2.0, volatility: 1.0, speed: 1.6 }
+        };
+
+        // Mining Control Functions
+        function toggleMining() {
+            isMiningActive = !isMiningActive;
+            updateMiningUI();
+            manageMiningProcess();
+        }
+
+        function updateMiningUI() {
+            const miningCard = document.getElementById('miningCard');
+            const statusElement = document.getElementById('miningStatus');
+            const button = document.getElementById('toggleMiningBtn');
+            const statusIndicator = miningCard.querySelector('.status-indicator');
+
+            if (isMiningActive) {
+                statusElement.textContent = 'ACTIVE';
+                statusElement.style.color = 'var(--primary)';
+                statusIndicator.classList.add('active-status');
+                miningCard.classList.add('glowing');
+                button.textContent = '⛏️ Stop Mining';
+                button.style.backgroundColor = 'var(--secondary)';
+            } else {
+                statusElement.textContent = 'INACTIVE';
+                statusElement.style.color = '#95a5a6';
+                statusIndicator.classList.remove('active-status');
+                miningCard.classList.remove('glowing');
+                button.textContent = '⛏️ Start Mining';
+                button.style.backgroundColor = '#34495e';
+            }
+        }
+
+        function manageMiningProcess() {
+            if (isMiningActive) {
+                startMining();
+            } else {
+                stopMining();
+            }
+        }
+
+        function startMining() {
+            clearInterval(miningInterval);
+            let progress = 0;
+            const risk = riskMultipliers[currentRiskProfile];
+
+            miningInterval = setInterval(() => {
+                progress = (progress + 1) % 101;
+                document.getElementById('miningProgress').style.width = `${progress}%`;
+
+                const baseHash = Math.floor(Math.random() * 1000) + 500;
+                const hashVolatility = baseHash * risk.volatility;
+                const hashRate = Math.floor(baseHash + (Math.random() * hashVolatility - hashVolatility/2));
+                
+                document.getElementById('hashRate').textContent = `${Math.max(hashRate, 100)} H/s`;
+
+                const reward = cryptoData[currentCrypto].rate * risk.reward;
+                balance += reward;
+                document.getElementById('balance').textContent = balance.toFixed(8);
+
+                if(autoWithdrawEnabled && balance >= withdrawThreshold) {
+                    performWithdraw();
+                }
+            }, miningSpeed / risk.speed);
+        }
+
+        function stopMining() {
+            clearInterval(miningInterval);
+            document.getElementById('miningProgress').style.width = '0%';
+            document.getElementById('hashRate').textContent = '0 H/s';
+        }
+
+        // Withdrawal System
+        function toggleWithdraw() {
+            const thresholdInput = document.getElementById('withdrawThreshold');
+            const threshold = parseFloat(thresholdInput.value);
+
+            if (!threshold || threshold < 0.00000001 || isNaN(threshold)) {
+                alert('Please enter a valid number greater than 0.00000001');
+                thresholdInput.focus();
+                return;
+            }
+
+            autoWithdrawEnabled = !autoWithdrawEnabled;
+            withdrawThreshold = threshold;
+
+            const withdrawCard = document.getElementById('withdrawCard');
+            const statusIndicator = withdrawCard.querySelector('.status-indicator');
+            const statusText = document.getElementById('withdrawStatusText');
+            const button = document.getElementById('withdrawToggleBtn');
+
+            if (autoWithdrawEnabled) {
+                statusText.textContent = 'ACTIVE';
+                statusText.style.color = 'var(--primary)';
+                statusIndicator.classList.add('active-status');
+                withdrawCard.classList.add('glowing');
+                button.textContent = '🚫 Disable Auto';
+                button.style.background = '#e74c3c';
+            } else {
+                statusText.textContent = 'INACTIVE';
+                statusText.style.color = '#95a5a6';
+                statusIndicator.classList.remove('active-status');
+                withdrawCard.classList.remove('glowing');
+                button.textContent = '💸 Enable Auto';
+                button.style.background = 'var(--secondary)';
+            }
+        }
+
+        function performWithdraw() {
+            const history = document.getElementById('withdrawHistory');
+            let amount = parseFloat(withdrawThreshold);
+
+            if(currentRiskProfile === 'high' && Math.random() < 0.3) {
+                const partialAmount = amount * 0.8;
+                balance = Math.max(balance - partialAmount, 0);
+                
+                history.innerHTML = `
+                    <div style="color: var(--danger); padding: 0.5rem; border-bottom: 1px solid #2ecc7030;">
+                        ⚠️ Partial withdrawal ${partialAmount.toFixed(8)} ${currentCrypto}
+                        <span style="color: #95a5a6; font-size: 0.8em;">${new Date().toLocaleTimeString()}</span>
+                    </div>${history.innerHTML}`;
+            } else {
+                balance = Math.max(balance - amount, 0);
+                history.innerHTML = `
+                    <div style="color: var(--primary); padding: 0.5rem; border-bottom: 1px solid #2ecc7030;">
+                        ✅ Withdrawn ${amount.toFixed(8)} ${currentCrypto}
+                        <span style="color: #95a5a6; font-size: 0.8em;">${new Date().toLocaleTimeString()}</span>
+                    </div>${history.innerHTML}`;
+            }
+            
+            document.getElementById('balance').textContent = balance.toFixed(8);
+        }
+
+        // Crypto Selection
+        function selectCrypto(crypto) {
+            currentCrypto = crypto;
+            document.querySelectorAll('.crypto-tab').forEach(tab => 
+                tab.classList.remove('active'));
+            event.target.classList.add('active');
+            if (isMiningActive) startMining();
+        }
+
+        // Risk Management
+        document.getElementById('riskProfile').addEventListener('change', function(e) {
+            currentRiskProfile = e.target.value;
+            const settingsCard = document.querySelector('.beta-settings');
+            const label = document.querySelector('.risk-profile-label');
+
+            settingsCard.classList.remove('high-risk-mode');
+            if(currentRiskProfile === 'high') {
+                settingsCard.classList.add('high-risk-mode');
+            }
+
+            if(label) {
+                label.innerHTML = `Risk Management:
+                    <span class="risk-indicator risk-${e.target.value}">
+                        ${e.target.value.toUpperCase()}
+                    </span>`;
+            }
+
+            if(isMiningActive) startMining();
+        });
+
+        // Advanced Controls
+        document.getElementById('advancedToggle').addEventListener('change', function(e) {
+            const advancedOptions = document.getElementById('advancedOptions');
+            advancedOptions.style.display = e.target.checked ? 'block' : 'none';
+        });
+
+        document.getElementById('miningIntensity').addEventListener('input', function(e) {
+            miningSpeed = 100 * (100 / e.target.value);
+            document.getElementById('intensityValue').textContent = `${e.target.value}%`;
+            if(isMiningActive) startMining();
+        });
+
+        document.getElementById('reinvestToggle').addEventListener('change', function(e) {
+            document.getElementById('reinvestPercentage').disabled = !e.target.checked;
+        });
+
+        // Debug Console
+        function showDebugConsole() {
+            const debugInfo = {
+                currentCrypto,
+                balance,
+                miningActive: isMiningActive,
+                autoWithdrawEnabled,
+                withdrawThreshold,
+                currentRiskProfile,
+                miningSpeed
+            };
+            console.table(debugInfo);
+            alert(`Syste
